@@ -1,0 +1,205 @@
+@reference "../../index.css";
+
+/* --- THEME VARIABLES  --- */
+
+/* DARK MODE */
+:global(html[data-theme="dark"]) .sectionContainer {
+  --bg-color: #0a0a0a;
+  --bg-gradient: radial-gradient(circle at 50% 30%, #1a1a1a 0%, #000000 70%);
+
+  --text-head: #ffffff;
+  --text-sub: rgba(255, 255, 255, 0.6);
+  --text-label: #525252;
+  
+  /* Card Styling */
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-bg-hover: rgba(255, 255, 255, 0.05);
+  --card-border-hover: rgba(255, 255, 255, 0.3);
+  
+  /* Feature List */
+  --check-color: #ffffff;
+  --x-color: #525252;
+  
+  /* Toggle */
+  --toggle-bg: #171717;
+  --toggle-slider: #333333;
+  --toggle-text: #a3a3a3;
+  --toggle-text-active: #ffffff;
+}
+
+/* LIGHT MODE */
+:global(html[data-theme="light"]) .sectionContainer {
+  /* Exact same BG as Process */
+  --bg-color: #e5e7eb; 
+  --bg-gradient: radial-gradient(circle at 50% 0%, #f3f4f6 0%, #d1d5db 100%);
+
+  --text-head: #000000; 
+  --text-sub: #4b5563;
+  --text-label: #9ca3af;
+
+  /* Card Styling (Clean White Glass) */
+  --card-bg: rgba(255, 255, 255, 0.5); 
+  --card-border: rgba(255, 255, 255, 0.8); 
+  --card-bg-hover: rgba(255, 255, 255, 0.8);
+  --card-border-hover: #000000;
+  
+  /* Feature List */
+  --check-color: #000000;
+  --x-color: #9ca3af;
+
+  /* Toggle */
+  --toggle-bg: rgba(0, 0, 0, 0.05);
+  --toggle-slider: #ffffff;
+  --toggle-text: #6b7280;
+  --toggle-text-active: #000000;
+}
+
+/* --- LAYOUT --- */
+.sectionContainer {
+  @apply relative w-full py-32 px-6 md:px-12 flex justify-center transition-colors duration-500;
+  background-color: var(--bg-color);
+  background-image: var(--bg-gradient);
+}
+
+.contentWrapper {
+  @apply max-w-7xl w-full flex flex-col gap-16 items-center;
+}
+
+/* --- HEADER --- */
+.header {
+  @apply flex flex-col items-center gap-8 w-full max-w-3xl;
+}
+
+.label {
+  @apply text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-500;
+  color: var(--text-label);
+}
+
+.headline {
+  @apply text-4xl md:text-5xl font-bold tracking-tight text-center transition-colors duration-500;
+  color: var(--text-head);
+}
+
+.italic {
+  @apply font-serif italic font-light;
+}
+
+.description {
+  @apply text-sm md:text-base text-center leading-relaxed transition-colors duration-500;
+  color: var(--text-sub);
+}
+
+/* --- TOGGLE SWITCH --- */
+.toggleContainer {
+  @apply relative flex items-center p-1 rounded-full w-64 h-12 transition-colors duration-500;
+  background-color: var(--toggle-bg);
+}
+
+.toggleBtn {
+  @apply flex-1 relative z-10 text-xs font-bold uppercase tracking-wider text-center h-full flex items-center justify-center transition-colors duration-300;
+  color: var(--toggle-text);
+}
+
+.toggleBtn.active {
+  color: var(--toggle-text-active);
+}
+
+.slider {
+  @apply absolute left-1 top-1 bottom-1 w-[calc(50%-4px)] rounded-full shadow-sm transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)];
+  background-color: var(--toggle-slider);
+}
+
+/* --- CARDS GRID --- */
+.cardsGrid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6 w-full items-start;
+}
+
+/* --- CARD COMPONENT --- */
+.card {
+  @apply relative flex flex-col p-8 rounded-2xl border transition-all duration-500;
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+  min-height: 540px;
+  
+  /* Glass Blur */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.card:hover {
+  @apply -translate-y-2 shadow-2xl;
+  background-color: var(--card-bg-hover);
+  border-color: var(--card-border-hover);
+}
+
+/* Popular Card Override */
+.popularCard {
+  @apply md:-mt-4 md:min-h-[580px]; /* Slightly taller and lifted */
+  border-color: var(--text-head); /* Solid border by default */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+.popularTag {
+  @apply absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-white shadow-lg;
+  background: linear-gradient(90deg, #2563eb, #7c3aed); /* Modern Blue-Purple Gradient */
+}
+
+/* Typography inside Card */
+.planName {
+  @apply text-lg font-bold uppercase tracking-widest transition-colors duration-500;
+  color: var(--text-head);
+}
+
+.priceBox {
+  @apply flex items-end gap-1 my-4;
+}
+
+.currency {
+  @apply text-2xl font-light mb-1;
+  color: var(--text-sub);
+}
+
+.price {
+  @apply text-5xl font-bold tracking-tighter transition-colors duration-500;
+  color: var(--text-head);
+}
+
+.period {
+  @apply text-sm font-medium mb-2;
+  color: var(--text-sub);
+}
+
+.planDesc {
+  @apply text-xs leading-relaxed min-h-[40px];
+  color: var(--text-sub);
+}
+
+.divider {
+  @apply w-full h-px my-6 transition-colors duration-500;
+  background-color: var(--card-border);
+}
+
+/* Features */
+.featureList {
+  @apply flex flex-col gap-4 mb-8;
+}
+
+.featureItem {
+  @apply flex items-start gap-3 text-xs md:text-sm font-medium transition-colors duration-500;
+  color: var(--text-sub);
+}
+
+.featureItem.disabled {
+  @apply opacity-50 line-through decoration-1;
+}
+
+.checkIcon {
+  @apply shrink-0 mt-0.5 transition-colors duration-500;
+  color: var(--check-color);
+}
+
+.xIcon {
+  @apply shrink-0 mt-0.5;
+  color: var(--x-color);
+}

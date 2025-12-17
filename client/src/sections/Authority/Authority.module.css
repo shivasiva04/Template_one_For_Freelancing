@@ -1,0 +1,249 @@
+@reference "../../index.css";
+
+/* --- THEME VARIABLES --- */
+
+:global(html[data-theme="dark"]) .sectionContainer {
+  --bg-color: #0a0a0a;
+  --bg-gradient: radial-gradient(circle at 50% 30%, #1a1a1a 0%, #000000 70%);
+
+  --text-head: #ffffff;
+  --text-sub: rgba(255, 255, 255, 0.6);
+  --text-label: #525252;
+
+  --overlay-inactive: rgba(0,0,0,0.7);
+  --overlay-active: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  --border-color: rgba(255,255,255,0.1);
+
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --accent-color: #3b82f6;
+  --graph-bar: rgba(255, 255, 255, 0.2);
+}
+
+:global(html[data-theme="light"]) .sectionContainer {
+  --bg-color: #e5e7eb; 
+  --bg-gradient: radial-gradient(circle at 50% 0%, #f3f4f6 0%, #d1d5db 100%);
+
+  --text-head: #000000; 
+  --text-sub: #4b5563;
+  --text-label: #9ca3af;
+
+  --overlay-inactive: rgba(255,255,255,0.3);
+  --overlay-active: linear-gradient(to top, rgba(255,255,255,0.9), transparent);
+  --border-color: rgba(0,0,0,0.1);
+
+  --card-bg: rgba(255, 255, 255, 0.5);
+  --card-border: rgba(255, 255, 255, 0.8);
+  --accent-color: #2563eb;
+  --graph-bar: rgba(0, 0, 0, 0.1);
+}
+
+/* --- MAIN LAYOUT (SINGLE SCREEN) --- */
+.sectionContainer {
+ 
+  @apply relative w-full h-[100dvh] min-h-[700px] flex flex-col justify-center overflow-hidden transition-colors duration-500;
+  background-color: var(--bg-color);
+  background-image: var(--bg-gradient);
+  
+  /* Add vertical padding to ensure content isn't touching edges */
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+}
+
+.contentWrapper {
+  /* Use flex-col to stack the two zones vertically */
+  @apply max-w-7xl w-full h-full mx-auto flex flex-col justify-between px-6 md:px-12;
+}
+
+/* Common Header Styles - Reduced Margins */
+.zoneHeader {
+  @apply w-full mb-2 text-left flex items-baseline gap-4;
+}
+
+.label {
+  @apply text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-500;
+  color: var(--text-label);
+}
+
+.headline {
+  @apply text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-500;
+  color: var(--text-head);
+}
+
+.italic {
+  @apply font-serif italic font-light;
+}
+
+/*  TEAM ACCORDION (Top ~50%) */
+.teamAccordion {
+
+  @apply w-full h-[45vh] flex gap-2 md:gap-4 mb-4;
+}
+
+.teamCard {
+  @apply relative h-full rounded-2xl overflow-hidden cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)];
+  flex: 1; 
+  border: 1px solid var(--border-color);
+}
+
+.teamCard.active {
+  flex: 4; 
+  border-color: var(--text-head);
+}
+
+.bgImage {
+  @apply absolute inset-0 bg-cover bg-center transition-transform duration-700 grayscale;
+  transform: scale(1.1);
+}
+
+.teamCard.active .bgImage {
+  @apply grayscale-0; 
+  transform: scale(1);
+}
+
+.overlay {
+  @apply absolute inset-0 transition-colors duration-500;
+  background: var(--overlay-inactive);
+}
+
+.teamCard.active .overlay {
+  background: var(--overlay-active);
+}
+
+/* Content resizing for smaller height */
+.inactiveContent {
+  @apply absolute inset-0 flex flex-col items-center justify-end pb-6 opacity-100 transition-opacity duration-300;
+}
+
+.teamCard.active .inactiveContent {
+  @apply opacity-0 pointer-events-none;
+}
+
+.verticalName {
+  @apply text-xs font-bold uppercase tracking-[0.3em] whitespace-nowrap;
+  color: var(--text-head);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.verticalNum {
+  @apply text-[9px] font-bold opacity-50 mt-4;
+  color: var(--text-head);
+}
+
+.activeContent {
+  @apply absolute inset-0 p-6 flex flex-col justify-end opacity-0 translate-y-4 transition-all duration-500 delay-100;
+}
+
+.teamCard.active .activeContent {
+  @apply opacity-100 translate-y-0;
+}
+
+.credentialsBox {
+  @apply mb-1;
+}
+
+.credentials {
+  @apply text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border;
+  color: var(--text-head);
+  border-color: var(--border-color);
+  backdrop-filter: blur(4px);
+}
+
+.memberName {
+  @apply text-2xl md:text-4xl font-bold leading-none mb-1;
+  color: var(--text-head);
+}
+
+.memberRole {
+  @apply text-xs font-medium uppercase tracking-widest opacity-80 mb-0.5;
+  color: var(--text-head);
+}
+
+.memberSpecialty {
+  @apply text-[10px] italic opacity-60;
+  color: var(--text-head);
+}
+
+.signature {
+  @apply mt-2 text-xl font-serif italic opacity-50 text-right;
+  color: var(--text-head);
+}
+
+
+/* Wrapper to push it to the bottom */
+.resultsZone {
+  @apply w-full h-[35vh] flex flex-col justify-end;
+}
+
+.resultsCarousel {
+  @apply w-full h-full flex gap-4 overflow-x-auto pb-2 snap-x items-stretch;
+  scrollbar-width: none; 
+}
+.resultsCarousel::-webkit-scrollbar {
+  display: none;
+}
+
+.resultCard {
+  /* Compact cards */
+  @apply relative min-w-[260px] md:min-w-[280px] h-full p-5 rounded-2xl border snap-center flex flex-col justify-between transition-all duration-300;
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+  backdrop-filter: blur(10px);
+}
+
+.resultCard:hover {
+  @apply -translate-y-1;
+  border-color: var(--text-label);
+}
+
+.caseId {
+  @apply text-[9px] font-bold tracking-widest opacity-50;
+  color: var(--text-head);
+}
+
+.iconBox {
+  @apply w-7 h-7 rounded-full flex items-center justify-center border;
+  border-color: var(--border-color);
+  color: var(--accent-color);
+}
+
+.metricLabel {
+  @apply text-[10px] font-medium uppercase tracking-wide opacity-70;
+  color: var(--text-sub);
+}
+
+.metricValue {
+  @apply text-3xl font-bold;
+  color: var(--accent-color);
+}
+
+.timeframe {
+  @apply text-[10px] font-serif italic;
+  color: var(--text-sub);
+}
+
+/* Compact Graph */
+.miniGraph {
+  @apply flex items-end justify-between h-8 gap-1 mt-2;
+}
+
+.graphBar {
+  @apply w-full rounded-t-[1px] transition-all duration-500;
+  background-color: var(--graph-bar);
+}
+
+.resultCard:hover .graphBar {
+  background-color: var(--accent-color);
+  opacity: 0.6;
+}
+
+.divider {
+  @apply w-full h-px my-3 opacity-20;
+  background-color: var(--text-sub);
+}
+
+.note {
+  @apply text-[10px] leading-relaxed italic opacity-80 line-clamp-2;
+  color: var(--text-sub);
+}

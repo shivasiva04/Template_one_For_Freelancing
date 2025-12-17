@@ -1,0 +1,177 @@
+@reference "../../../index.css";
+
+
+.navContainer {
+  @apply fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-4 md:px-12 transition-all duration-300;
+  
+  /* --- 1. ALWAYS APPLY BLUR (Glass Effect) --- */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  /* --- 2. HERO VARIABLES (Default) --- */
+  
+  --nav-bg: rgba(255, 255, 255, 0.01); 
+  --nav-border: rgba(255, 255, 255, 0.1);
+  --nav-shadow: none;
+  
+  /* FORCE WHITE TEXT initially (Visible on dark Hero image) */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  
+  --icon-bg: rgba(255, 255, 255, 0.15);
+  --icon-hover: rgba(255, 255, 255, 0.25);
+
+  /* Apply the variables */
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--nav-border);
+  box-shadow: var(--nav-shadow);
+}
+
+
+/* --- LIGHT MODE (SCROLLED) --- */
+:global(html[data-theme="light"]) .navContainer.scrolled {
+ 
+  --nav-bg: rgba(255, 255, 255, 0.02); 
+  
+  --nav-border: rgba(0, 0, 0, 0.08);
+  --nav-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  
+  /* CHANGE: Text turns Dark Grey on scroll */
+  --text-primary: #111827; 
+  --text-secondary: #4b5563;
+  
+  /* Icon buttons turn dark */
+  --icon-bg: rgba(0, 0, 0, 0.05);
+  --icon-hover: rgba(0, 0, 0, 0.1);
+}
+
+/* --- DARK MODE (SCROLLED) --- */
+
+:global(html[data-theme="dark"]) .navContainer.scrolled {
+  /* Smoked Glass effect */
+  --nav-bg: rgba(0, 0, 0, 0.1); 
+  
+  --nav-border: rgba(255, 255, 255, 0.1);
+  --nav-shadow: none;
+  
+  /* Text stays Light */
+  --text-primary: #d1d5db; 
+  --text-secondary: #9ca3af;
+  
+  --icon-bg: rgba(255, 255, 255, 0.05);
+  --icon-hover: rgba(255, 255, 255, 0.15);
+}
+
+
+
+/* --- LOGO --- */
+.logoBox {
+  @apply flex items-center gap-3 cursor-pointer select-none;
+}
+
+.logoIcon {
+  @apply w-8 h-8 rounded-lg flex items-center justify-center border transition-all duration-300;
+  background: var(--icon-bg);
+  border-color: var(--nav-border);
+  color: var(--text-primary);
+}
+
+.brandName {
+  @apply font-bold text-xl tracking-wide uppercase transition-colors duration-300;
+  color: var(--text-primary);
+  text-shadow: none;
+}
+
+/* --- LINKS --- */
+.navLinks {
+  @apply hidden md:flex items-center gap-10;
+}
+
+.linkItem {
+  @apply text-[11px] font-bold tracking-[0.2em] uppercase transition-all duration-300;
+  color: var(--text-secondary);
+}
+
+.linkItem:hover {
+  color: var(--text-primary);
+  text-shadow: 0 0 10px var(--icon-hover); 
+}
+
+/* --- THEME TOGGLE BUTTON --- */
+.themeToggle {
+  @apply p-2 rounded-full transition-all duration-300 hover:scale-110 active:scale-95;
+  color: var(--text-primary);
+  background: var(--icon-bg);
+  border: 1px solid transparent;
+}
+
+.themeToggle:hover {
+  background: var(--icon-hover);
+  border-color: var(--nav-border);
+}
+
+/* Mobile Menu Trigger Button */
+.menuIconBtn {
+  @apply md:hidden flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-300 border;
+  background: var(--icon-bg);
+  border-color: var(--nav-border);
+  color: var(--text-primary);
+}
+
+.menuIconBtn:hover {
+  background: var(--icon-hover);
+}
+
+/* Mobile Full Screen Overlay */
+.mobileOverlay {
+  @apply fixed inset-0 top-0 left-0 w-full h-screen z-[-1] flex flex-col pt-24 px-8 transition-all duration-500 ease-in-out;
+  background: var(--bg-color); 
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+}
+
+
+.menuActive {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+
+.mobileContent {
+  @apply flex flex-col gap-6 mt-10;
+}
+
+
+.mobileLink {
+  @apply text-3xl font-bold uppercase tracking-tighter flex items-baseline gap-4 transition-all duration-300;
+  color: var(--text-primary);
+}
+
+.linkNumber {
+  @apply text-xs font-mono opacity-40 tracking-normal;
+}
+
+.mobileLink:hover {
+  @apply translate-x-2;
+  color: var(--text-secondary);
+}
+
+.mobileFooter {
+  @apply mt-auto pb-12;
+  border-top: 1px solid var(--nav-border);
+  padding-top: 2rem;
+}
+
+:global(html[data-theme="dark"]) .mobileOverlay {
+  background: rgba(10, 10, 10, 0.95);
+}
+
+:global(html[data-theme="light"]) .mobileOverlay {
+  background: rgba(229, 231, 235, 0.95);
+}

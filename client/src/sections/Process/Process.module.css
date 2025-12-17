@@ -1,0 +1,171 @@
+@reference "../../index.css";
+
+/* --- THEME VARIABLES --- */
+
+/* DARK MODE: */
+:global(html[data-theme="dark"]) .sectionContainer {
+  /* Background */
+  --bg-color: #0a0a0a;
+  --bg-gradient: radial-gradient(circle at 50% 30%, #1a1a1a 0%, #000000 70%);
+
+  /* Text Colors */
+  --text-main: #ffffff; 
+  --text-head: #ffffff;
+  --text-body: rgba(255, 255, 255, 0.6);
+  --text-label: #525252;
+  
+  /* Timeline Elements */
+  --line-color: rgba(255, 255, 255, 0.1);
+  --line-active: #ffffff; 
+  
+  /* Step Cards (Glass) */
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-hover-border: rgba(255, 255, 255, 0.3);
+  
+  /* Markers */
+  --marker-bg: #000000;
+  --marker-border: rgba(255, 255, 255, 0.2);
+  --marker-icon: #ffffff;
+  
+  /* Big Number */
+  --number-color: rgba(255, 255, 255, 0.05);
+}
+
+/* LIGHT MODE: Premium Editorial (Text changes to Dark Grey) */
+:global(html[data-theme="light"]) .sectionContainer {
+ 
+  --bg-color: #e5e7eb; 
+  --bg-gradient: radial-gradient(circle at 50% 0%, #f3f4f6 0%, #d1d5db 100%);
+
+  --text-main: #111827; 
+  
+  --text-head: #111827; 
+  --text-body: #4b5563; 
+  --text-label: #6b7280; 
+
+  /* Timeline Elements */
+  --line-color: rgba(0, 0, 0, 0.15); 
+  /* Step Cards (Glass) */
+  --card-bg: rgba(255, 255, 255, 0.6); 
+  --card-border: rgba(255, 255, 255, 0.9); 
+  --card-hover-border: #111827;
+  
+  /* Markers */
+  --marker-bg: #ffffff;
+  --marker-border: rgba(0, 0, 0, 0.2);
+  --marker-icon: #111827;
+  
+  /* Big Number */
+  --number-color: rgba(0, 0, 0, 0.06);
+}
+
+/* --- MAIN CONTAINER --- */
+.sectionContainer {
+  @apply relative w-full py-32 px-6 md:px-12 flex justify-center overflow-hidden transition-colors duration-500;
+  background-color: var(--bg-color);
+  background-image: var(--bg-gradient);
+ 
+  color: var(--text-main);
+}
+
+/* "Blueprint" Grid Pattern Background */
+.sectionContainer::before {
+  content: "";
+  @apply absolute inset-0 opacity-[0.3] pointer-events-none;
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, var(--line-color) 1px, transparent 1px),
+                    linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+}
+
+.contentWrapper {
+  @apply relative z-10 max-w-7xl w-full flex flex-col gap-20;
+}
+
+/* --- HEADER --- */
+.header {
+  @apply flex flex-col gap-3 items-start md:items-center text-left md:text-center;
+}
+
+.label {
+  @apply text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-500;
+  color: var(--text-label);
+}
+
+.headline {
+  @apply text-4xl md:text-6xl font-bold tracking-tight transition-colors duration-500;
+  color: var(--text-head);
+}
+
+.italic {
+  @apply font-serif italic font-light;
+}
+
+/* --- TIMELINE GRID --- */
+.timelineGrid {
+  @apply relative grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6;
+}
+
+/* The Horizontal Line (Desktop) */
+.connectorLine {
+  
+  @apply hidden md:block absolute top-[32px] left-0 w-full h-px transition-colors duration-500;
+  background-color: var(--line-color);
+  z-index: 0;
+}
+
+/* --- STEP CARD --- */
+.stepCard {
+  @apply relative z-10 flex flex-col gap-6 p-6 rounded-2xl border transition-all duration-500;
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+  
+  /* Glass Blur */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.stepCard:hover {
+  @apply -translate-y-2;
+  border-color: var(--card-hover-border);
+}
+
+/* MARKER AREA */
+.markerWrapper {
+  @apply relative flex items-center justify-between;
+}
+
+/* The Circle Icon */
+.markerCircle {
+  @apply w-16 h-16 rounded-full border flex items-center justify-center transition-all duration-500;
+  
+  background-color: var(--marker-bg);
+  border-color: var(--marker-border);
+  color: var(--marker-icon);
+  
+  /* Shadow to lift it off the line */
+  box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+.stepCard:hover .markerCircle {
+  @apply scale-110;
+  border-color: var(--text-head);
+}
+
+/* Large Background Number */
+.stepNumber {
+  @apply text-5xl font-bold transition-colors duration-500;
+  color: var(--number-color);
+}
+
+/* TEXT CONTENT */
+.stepTitle {
+  @apply text-lg font-bold transition-colors duration-500;
+  color: var(--text-head);
+}
+
+.stepDesc {
+  @apply text-sm leading-relaxed transition-colors duration-500;
+  color: var(--text-body);
+}

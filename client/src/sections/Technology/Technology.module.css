@@ -1,0 +1,367 @@
+@reference "../../index.css";
+
+/* --- THEME VARIABLES --- */
+:global(html[data-theme="dark"]) .sectionContainer {
+  --bg-color: #0a0a0a;
+  --bg-gradient: radial-gradient(circle at 50% 30%, #1a1a1a 0%, #000000 70%);
+  --text-head: #ffffff;
+  --text-sub: rgba(255, 255, 255, 0.6);
+  --text-label: #525252;
+  
+  --phone-bg: rgba(20, 20, 20, 0.6);
+  --phone-border: rgba(255, 255, 255, 0.15);
+  --phone-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  
+  --app-card-bg: rgba(255, 255, 255, 0.05);
+  --app-text-main: #ffffff;
+  --app-text-sub: #a3a3a3;
+  --accent-color: #3b82f6; 
+  --accent-glow: rgba(59, 130, 246, 0.5);
+  --trend-color: #4ade80; 
+  --cable-color: #3b82f6;
+
+  --btn-bg: rgba(255, 255, 255, 0.05);
+  --btn-border: rgba(255, 255, 255, 0.2);
+  --btn-text: #ffffff;
+  --btn-active-bg: #ffffff;
+  --btn-active-text: #000000;
+}
+
+:global(html[data-theme="light"]) .sectionContainer {
+  --bg-color: #e5e7eb; 
+  --bg-gradient: radial-gradient(circle at 50% 0%, #f3f4f6 0%, #d1d5db 100%);
+  --text-head: #000000; 
+  --text-sub: #4b5563;
+  --text-label: #9ca3af;
+
+  --phone-bg: rgba(255, 255, 255, 0.65);
+  --phone-border: rgba(255, 255, 255, 0.9);
+  --phone-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  
+  --app-card-bg: #ffffff;
+  --app-text-main: #111827;
+  --app-text-sub: #6b7280;
+  --accent-color: #2563eb; 
+  --accent-glow: rgba(37, 99, 235, 0.2);
+  --trend-color: #16a34a;
+  --cable-color: #2563eb;
+
+  --btn-bg: rgba(255, 255, 255, 0.5);
+  --btn-border: rgba(0, 0, 0, 0.1);
+  --btn-text: #000000;
+  --btn-active-bg: #000000;
+  --btn-active-text: #ffffff;
+}
+
+/* --- MAIN LAYOUT --- */
+.sectionContainer {
+  
+  @apply relative w-full min-h-screen py-12 md:py-0 flex items-center justify-center overflow-hidden transition-colors duration-500;
+  background-color: var(--bg-color);
+  background-image: var(--bg-gradient);
+}
+
+.contentWrapper {
+ 
+  @apply max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center px-6 md:px-12 pb-12 lg:pb-0;
+}
+
+/* --- TEXT COLUMN --- */
+.textColumn {
+  
+  @apply flex flex-col gap-6 lg:pr-8 order-2 lg:order-1 items-center lg:items-start text-center lg:text-left z-20;
+}
+
+.label {
+  @apply text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-500;
+  color: var(--text-label);
+}
+
+.headline {
+  @apply text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight transition-colors duration-500 leading-[1.1];
+  color: var(--text-head);
+}
+
+.italic {
+  @apply font-serif italic font-light;
+}
+
+.description {
+  @apply text-sm md:text-base leading-relaxed max-w-md transition-colors duration-500;
+  color: var(--text-sub);
+}
+
+.featureGrid {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2 w-full max-w-md;
+}
+
+.featureItem {
+  @apply flex items-center justify-center gap-4 p-2 rounded-lg transition-colors;
+}
+
+.iconBox {
+  @apply w-10 h-10 shrink-0 rounded-full flex items-center justify-center border transition-colors duration-500;
+  background-color: var(--app-card-bg);
+  border-color: var(--phone-border);
+  color: var(--text-head);
+}
+
+.featTitle {
+  @apply font-bold text-sm mb-0.5;
+  color: var(--text-head);
+}
+
+.featDesc {
+  @apply text-xs leading-tight;
+  color: var(--text-sub);
+}
+
+/* --- TOGGLE BUTTON --- */
+.viewToggleBtn {
+  @apply mt-6 flex items-center gap-3 px-5 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 w-fit cursor-pointer border backdrop-blur-md z-30;
+  background-color: var(--btn-bg);
+  border-color: var(--btn-border);
+  color: var(--btn-text);
+}
+
+.viewToggleBtn:hover {
+  @apply scale-105;
+}
+
+.viewToggleBtn.active {
+  background-color: var(--btn-active-bg);
+  color: var(--btn-active-text);
+  border-color: var(--btn-active-bg);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* VISUAL & CHARGING SYSTEM (Adjusted) */
+.visualColumn {
+ 
+  @apply relative w-full h-[550px] md:h-[650px] lg:h-auto flex items-center justify-center perspective-[1200px] order-1 lg:order-2;
+  @apply overflow-visible; 
+}
+
+/* CHARGING SYSTEM WRAPPER */
+.chargingSystem {
+  @apply relative flex items-center justify-center;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* --- MOBILE CONFIGURATION --- */
+  @apply scale-[0.55] translate-x-[55px];
+
+  /* --- TABLET CONFIGURATION --- */
+  @apply md:scale-[0.75] md:translate-x-[30px];
+
+  /* --- DESKTOP CONFIGURATION --- */
+  @apply lg:scale-100 lg:translate-x-[20px];
+}
+
+.chargingSystem[data-interactive="true"] {
+  transition: transform 0.1s linear;
+  cursor: grab;
+}
+
+/* --- POWER BANK --- */
+.powerBank {
+  @apply absolute left-[-115px] w-[70px] h-[140px] mt-18 rounded-2xl border flex flex-col items-center justify-between p-4;
+  top: 50%;
+  transform: translateY(-20%) translateZ(20px);
+  
+  background-color: var(--phone-bg);
+  border-color: var(--phone-border);
+  box-shadow: var(--phone-shadow);
+  backdrop-filter: blur(20px);
+  z-index: 10;
+}
+
+.pbIndicators {
+  @apply flex gap-1;
+}
+
+.pbLight {
+  @apply w-1.5 h-1.5 rounded-full;
+  background-color: var(--trend-color);
+  box-shadow: 0 0 5px var(--trend-color);
+}
+
+.chargingIcon {
+  @apply animate-pulse opacity-80;
+  color: var(--accent-color);
+}
+
+.outputPort {
+  @apply w-8 h-3 rounded-sm border opacity-50;
+  border-color: var(--text-sub);
+  background-color: var(--app-card-bg);
+}
+
+/* --- CABLE --- */
+.cableSvg {
+  @apply absolute left-[-98px] bottom-[-20px] w-[280px] h-[150px] pointer-events-none;
+  transform: translateZ(25px);
+  z-index: 5;
+}
+
+.cableWire {
+  @apply fill-none stroke-[3px] opacity-20;
+  stroke: var(--text-sub);
+  stroke-linecap: round;
+}
+
+.cableGlow {
+  @apply fill-none stroke-[2px] opacity-100;
+  stroke: var(--cable-color);
+  stroke-linecap: round;
+  stroke-dasharray: 10;
+  animation: energyFlow 1.5s linear infinite;
+}
+
+@keyframes energyFlow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+/* --- PHONE FRAME --- */
+.phoneFrame {
+  
+  @apply relative w-[280px] h-[550px] rounded-[36px] p-5 flex flex-col gap-4 border select-none overflow-hidden;
+  
+  transform: translateZ(50px);
+  background-color: var(--phone-bg);
+  border-color: var(--phone-border);
+  box-shadow: var(--phone-shadow);
+  backdrop-filter: blur(20px);
+}
+
+/* --- INTERNAL UI ELEMENTS --- */
+.statusBar {
+  @apply flex justify-between items-center text-[10px] font-medium px-1 opacity-80 mb-2;
+  color: var(--app-text-main);
+}
+
+.chargingBolt {
+  @apply animate-pulse;
+  color: var(--trend-color);
+}
+
+.appHeader {
+  @apply flex justify-between items-end mb-2;
+}
+
+.greeting {
+  @apply text-[9px] font-medium block opacity-70 uppercase tracking-wide;
+  color: var(--app-text-sub);
+}
+
+.userName {
+  @apply text-xl font-bold tracking-tight;
+  color: var(--app-text-main);
+}
+
+.notificationBtn {
+  @apply relative p-2 rounded-full border transition-colors;
+  background-color: var(--app-card-bg);
+  border-color: var(--phone-border);
+  color: var(--app-text-main);
+}
+
+.redDot {
+  @apply absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-red-500 border border-white;
+}
+
+.scoreCard {
+  @apply flex items-center gap-3 p-3 rounded-2xl border mb-2;
+  background-color: var(--app-card-bg);
+  border-color: var(--phone-border);
+}
+
+.scoreCircle {
+  @apply w-12 h-12 shrink-0 rounded-full flex flex-col items-center justify-center border-[3px];
+  border-color: var(--accent-color);
+  color: var(--app-text-main);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.scoreValue {
+  @apply text-lg font-bold leading-none;
+}
+
+.scoreLabel {
+  @apply text-[6px] font-bold tracking-wider opacity-70;
+}
+
+.cardTitle {
+  @apply text-xs font-bold;
+  color: var(--app-text-main);
+}
+
+.cardSub {
+  @apply text-[9px] leading-tight mt-0.5 opacity-80;
+  color: var(--app-text-sub);
+}
+
+.statsGrid {
+  @apply grid grid-cols-3 gap-2 mb-2;
+}
+
+.statBox {
+  @apply p-2.5 rounded-xl border flex flex-col items-center justify-center gap-1 text-center;
+  background-color: var(--app-card-bg);
+  border-color: var(--phone-border);
+}
+
+.statLabel {
+  @apply text-[7px] font-bold uppercase tracking-wide opacity-60;
+  color: var(--app-text-sub);
+}
+
+.statValue {
+  @apply text-sm font-bold;
+  color: var(--app-text-main);
+}
+
+.statUnit {
+  @apply text-[8px] font-medium opacity-50 ml-0.5;
+  color: var(--app-text-main);
+}
+
+.statTrend {
+  @apply text-[8px] font-bold;
+  color: var(--trend-color);
+}
+
+.graphCard {
+  @apply flex-1 p-4 rounded-2xl border flex flex-col justify-between;
+  background-color: var(--app-card-bg);
+  border-color: var(--phone-border);
+}
+
+.graphContainer {
+  @apply flex items-end justify-between gap-1.5 h-24 border-b pb-1 px-1;
+  border-color: var(--phone-border);
+}
+
+.bar {
+  @apply w-full rounded-t-sm transition-all duration-1000 ease-out relative;
+  background-color: var(--accent-color);
+  opacity: 0.8;
+}
+
+.bar:hover {
+  opacity: 1;
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.homeIndicator {
+  @apply w-12 h-1 rounded-full bg-current mx-auto opacity-20 mt-4;
+  color: var(--app-text-main);
+}
+
+.glowEffect {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] lg:w-[450px] lg:h-[450px] rounded-full opacity-30 blur-[80px] -z-10 transition-colors duration-500 pointer-events-none;
+  background: var(--accent-color);
+}

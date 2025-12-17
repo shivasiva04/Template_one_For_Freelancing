@@ -1,0 +1,119 @@
+@reference "../../../index.css";
+
+/* Reuse Theme Logic from Process Section */
+:global(html[data-theme="dark"]) .footerContainer {
+  --bg-color: #0a0a0a;
+  --text-head: #ffffff;
+  --text-body: rgba(255, 255, 255, 0.6);
+  --line-color: rgba(255, 255, 255, 0.1);
+  --input-bg: rgba(255, 255, 255, 0.03);
+  --input-border: rgba(255, 255, 255, 0.1);
+}
+
+:global(html[data-theme="light"]) .footerContainer {
+  --bg-color: #e5e7eb;
+  --text-head: #111827;
+  --text-body: #4b5563;
+  --line-color: rgba(0, 0, 0, 0.1);
+  --input-bg: rgba(255, 255, 255, 0.6);
+  --input-border: rgba(0, 0, 0, 0.1);
+}
+
+.footerContainer {
+  @apply relative w-full pt-20 pb-10 px-6 md:px-12 flex flex-col items-center overflow-hidden border-t;
+  background-color: var(--bg-color);
+  border-color: var(--line-color);
+}
+
+/* Blueprint Grid Pattern */
+.footerContainer::before {
+  content: "";
+  @apply absolute inset-0 opacity-[0.2] pointer-events-none;
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, var(--line-color) 1px, transparent 1px),
+                    linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
+}
+
+.contentWrapper {
+  @apply relative z-10 max-w-7xl w-full grid grid-cols-1 md:grid-cols-12 gap-12 mb-20;
+}
+
+/* BRAND COLUMN */
+.brandCol {
+  @apply md:col-span-4 flex flex-col gap-6;
+}
+
+.logo {
+  @apply text-2xl font-bold tracking-tighter;
+  color: var(--text-head);
+}
+
+.logoHighlight {
+  @apply font-serif italic font-light opacity-70;
+}
+
+.description {
+  @apply text-sm leading-relaxed max-w-xs;
+  color: var(--text-body);
+}
+
+/* LINK COLUMNS */
+.linkCol {
+  @apply md:col-span-2 flex flex-col gap-6;
+}
+
+.columnTitle {
+  @apply text-[10px] font-bold uppercase tracking-[0.2em];
+  color: var(--text-head);
+}
+
+.linkList {
+  @apply flex flex-col gap-4;
+}
+
+.linkItem {
+  @apply text-sm transition-colors duration-300 hover:opacity-100 opacity-60;
+  color: var(--text-body);
+}
+
+/* NEWSLETTER COLUMN */
+.newsletterCol {
+  @apply md:col-span-4 flex flex-col gap-6;
+}
+
+.inputGroup {
+  @apply flex w-full border rounded-lg overflow-hidden transition-all duration-300;
+  background: var(--input-bg);
+  border-color: var(--input-border);
+}
+
+.input {
+  @apply bg-transparent px-4 py-3 text-sm outline-none flex-grow;
+  color: var(--text-head);
+}
+
+.submitBtn {
+  @apply px-6 py-3 text-xs font-bold uppercase tracking-widest transition-all;
+  background: var(--text-head);
+  color: var(--bg-color);
+}
+
+/* BOTTOM BAR */
+.bottomBar {
+  @apply relative z-10 w-full max-w-7xl flex flex-col md:flex-row justify-between items-center pt-8 border-t gap-6;
+  border-color: var(--line-color);
+}
+
+.socialWrapper {
+  @apply flex gap-6;
+}
+
+.socialIcon {
+  @apply transition-transform duration-300 hover:-translate-y-1 opacity-60 hover:opacity-100;
+  color: var(--text-head);
+}
+
+.copyright {
+  @apply text-[10px] uppercase tracking-widest;
+  color: var(--text-body);
+}
